@@ -8,8 +8,10 @@ project(img_process)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  std_msgs
   cv_bridge
   rospy
+  tf
 )
 
 ## System dependencies are found with CMake's conventions
