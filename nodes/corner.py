@@ -10,7 +10,8 @@ def start_node(filename):
     rospy.init_node('croner_pub')
     rospy.loginfo('corner_pub node started')
     pub = rospy.Publisher('corners', std_msgs.msg.Float32MultiArray, queue_size=10)
-
+    
+    if(filename[-1] != '\\'): filename += '\\'
     image = cv2.imread(filename + '0_1.png')
     print(image.shape)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)

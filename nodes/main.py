@@ -15,6 +15,9 @@ class Triangulate:
     def corners_callback(self, msg):
         # "Store" the message received.
         self.corners = msg
+    
+    def get_length():
+        pass
 
 
 def start_node():

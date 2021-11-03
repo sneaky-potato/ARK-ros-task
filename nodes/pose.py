@@ -11,7 +11,8 @@ def start_node(filepath):
     rospy.loginfo('pose_pub node started')
     pub = rospy.Publisher('pose', std_msgs.msg.Float32MultiArray, queue_size=10)
 
-    f = open(filepath + '0_2.txt', "r")
+    if(filepath[-1] != '\\'): filepath += '\\'
+    f = open(filepath + '1_2.txt', "r")
     vector = f.read()
     vector = re.sub('<.*?>', '', vector)
     dictionary = eval(vector)
@@ -28,10 +29,9 @@ def start_node(filepath):
     c_y = 144 // 2
 
     intrinsic = np.matrix([[f_x, 0, c_x, 0], [0, f_y, c_y, 0], [0, 0, 1, 0]])
-    
+
     projection = np.matmul(intrinsic, extrinsic)
-    print(rmat)
-    print(tvec)
+    print(projection)
     while not rospy.is_shutdown():
         data_to_send = std_msgs.msg.Float32MultiArray()  # the data to be sent, initialise the array
         
