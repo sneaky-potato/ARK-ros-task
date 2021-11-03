@@ -14,6 +14,9 @@ def start_node(filename):
 
 if __name__ == '__main__':
     try:
+        if(not (sys.argv)[1]):
+            print("Usage: rosrun [PACKAGE_NAME] [NODE] [filepath]")
+            pass
         start_node( rospy.myargv(argv=sys.argv)[1])
     except rospy.ROSInterruptException:
         pass
