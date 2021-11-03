@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   cv_bridge
   rospy
   tf
+  message_filters
 )
 
 ## System dependencies are found with CMake's conventions
