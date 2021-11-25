@@ -11,7 +11,7 @@ def start_node(filename):
     pub = rospy.Publisher('corners', std_msgs.msg.Float32MultiArray, queue_size=10)
     
     if(filename[-1] != '/'): filename += '/'
-    cornerlist = np.zeros((10, 2, 2))
+    cornerlist = np.zeros((10, 6, 2))
     for i in range(10):
         image = cv2.imread(filename + str(i) + '_1.png')
         print(image.shape)
@@ -30,10 +30,9 @@ def start_node(filename):
         dst = np.uint8(dst)
         output = cv2.connectedComponentsWithStats(dst, 4, cv2.CV_32S)
         
-        centroids = output[3][1:,:]
-        cornerlist[i, :, :] = np.matrix([[corners[minind, 0], corners[maxind, 0]], [corners[minind, 1], corners[maxind, 1]]])
-        #print(corners)
-        image[dst>0.1*dst.max()]=[0,0,255]
+        centroids = np.zeros((6,2))
+        centroids[:output[3][1:,:].shape[0], :] = output[3][1:,:]
+        cornerlist[i, :, :] = centroids
 
     while not rospy.is_shutdown():
         data_to_send = std_msgs.msg.Float32MultiArray()  # the data to be sent, initialise the array
